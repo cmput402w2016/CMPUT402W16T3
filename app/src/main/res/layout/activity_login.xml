@@ -10,6 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.ualberta.cs.kaleidoscope.LoginActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kaleidoscope"
+        android:textAlignment="center"
+        android:textSize="30dp"/>
+
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"

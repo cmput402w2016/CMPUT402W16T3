@@ -309,6 +309,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+//            Thread loginThread = new Thread(new LoginThread());
+//            loginThread.start();
+
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
