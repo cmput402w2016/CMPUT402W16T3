@@ -1,24 +1,21 @@
 package ca.ualberta.cs.kaleidoscope;
 
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import net.majorkernelpanic.streaming.Session;
-import net.majorkernelpanic.streaming.SessionBuilder;
-import net.majorkernelpanic.streaming.audio.AudioQuality;
-import net.majorkernelpanic.streaming.gl.SurfaceView;
-import net.majorkernelpanic.streaming.video.VideoQuality;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements Session.Callback {
 
@@ -37,17 +34,35 @@ public class MainActivity extends AppCompatActivity implements Session.Callback 
                         .setAction("Action", null).show();
             }
         });
-        SurfaceView mSurfaceView = (SurfaceView) findViewById(R.id.surface);
-        Session mSession = SessionBuilder.getInstance()
-                .setCallback(this)
-                .setSurfaceView(mSurfaceView)
-                .setPreviewOrientation(90)
-                .setContext(getApplicationContext())
-                .setAudioEncoder(SessionBuilder.AUDIO_NONE)
-                .setAudioQuality(new AudioQuality(16000, 32000))
-                .setVideoEncoder(SessionBuilder.VIDEO_H264)
-                .setVideoQuality(new VideoQuality(320, 240, 20, 500000))
-                .build();
+
+        populateStreamList();
+    }
+
+    /*
+        Method that populates the the list of streams
+        TODO: Right now the stream list is hard coded
+     */
+    private void populateStreamList() {
+        // Construct the data source
+        ArrayList<Stream> arrayOfStreams = Stream.getStreams();
+        // Create the adapter to convert the array to views
+        StreamAdapter adapter = new StreamAdapter(this, arrayOfStreams);
+        // Attach the adapter to a ListView
+        ListView listView = (ListView) findViewById(R.id.lvStreams);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent,
+                                    final View view, int position, long id) {
+                Stream item = (Stream) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(MainActivity.this, StreamActivity.class);
+                startActivity(intent);
+
+                Log.d("ListView", "Selected item : " + item);
+            }
+        });
     }
 
     @Override
