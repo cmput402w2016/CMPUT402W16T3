@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="example_switch"
+        android:summary="Specify the type of your color blindness."
+        android:title="Color Blindness" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="example_switch"
+        android:summary="Select your preferred font size."
+        android:title="Font Size" />
+</PreferenceScreen>

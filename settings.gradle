@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':smack-android-4.1.6'
 include ':libstreaming'

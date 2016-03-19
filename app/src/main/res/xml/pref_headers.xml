@@ -17,4 +17,9 @@
         android:icon="@drawable/ic_sync_black_24dp"
         android:title="@string/pref_header_data_sync" />
 
+    <header
+        android:fragment="ca.ualberta.cs.kaleidoscope.SettingsActivity$AccessibilityFragment"
+        android:icon="@drawable/ic_accessibility"
+        android:title="@string/pref_header_accessibility" />
+
 </preference-headers>
